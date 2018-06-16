@@ -3,4 +3,4 @@ A super simple python module that hits the NHTSA api and decodes a given list of
 Usage:
 
 ">>from vin_decoder import VinDecoder"<br>
-">>VinDecoder(**My_list_of_VINs**)""
+">>VinDecoder(**My_list_of_VINs**)"
