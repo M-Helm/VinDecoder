@@ -5,7 +5,7 @@ import json
 
 
 class VinDecoder():
-    """."""
+    """Super simple module to decode VINs using the NHTSA API."""
 
     def __init__(self, vin_arr):
         """Initialize the decoder."""
@@ -38,5 +38,5 @@ class VinDecoder():
 
 
 if __name__ == "__main__":
-    vins = ['5UXWX7C5*BA']
+    vins = ['5UXWX7C5*BA']  # generic BMW VIN (with wildcard) as a test
     decoder = VinDecoder(vins)
