@@ -12,29 +12,31 @@ class VinDecoder():
         self.__decode(vin_arr)
         return None
 
-    def __decode(self, arr):
-        for v in arr:
-            url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/\
-                %s?format=json' % v
-            url = url.strip()
-            url = url.replace(" ", "")
-            res = urllib2.urlopen(url).read()
-            obj = json.loads(res)
-            if 'Results' in obj:
-                o = obj['Results']
-                for i in o:
-                    if i['Variable'] == 'Model Year':
-                        year = i['Value']
-                    if i['Variable'] == 'Make':
-                        make = i['Value']
-                    if i['Variable'] == 'Model':
-                        model = i['Value']
-                    if i['Variable'] == 'Displacement (L)':
-                        disp = i['Value']
-                    if i['Variable'] == 'Engine Number of Cylinders':
-                        cyl = i['Value']
-                print "vin: %s %s %s %s, Disp: %s Cyl: %s" \
-                    % (v, year, make, model, disp, cyl)
+    def decode(self, vin):
+        """Decode the given VIN."""
+        url = 'https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/\
+            %s?format=json' % vin
+        url = url.strip()
+        url = url.replace(" ", "")
+        res = urllib2.urlopen(url).read()
+        obj = json.loads(res)
+        if 'Results' in obj:
+            o = obj['Results']
+            for i in o:
+                if i['Variable'] == 'Model Year':
+                    year = i['Value']
+                if i['Variable'] == 'Make':
+                    make = i['Value']
+                if i['Variable'] == 'Model':
+                    model = i['Value']
+                if i['Variable'] == 'Displacement (L)':
+                    disp = i['Value']
+                if i['Variable'] == 'Engine Number of Cylinders':
+                    cyl = i['Value']
+            print "vin: %s %s %s %s, Disp: %s Cyl: %s" \
+                % (vin, year, make, model, disp, cyl)
+            return {'vin': vin, 'year': year, 'make': make,
+                    'model': model, 'disp': disp, 'cyl': cyl}
 
 
 if __name__ == "__main__":
